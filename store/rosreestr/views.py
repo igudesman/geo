@@ -6,15 +6,18 @@ def object_info(request):
 	context = {}
 	if request.method == "POST":
 		info = []
-		data = request.POST.get('search')
-		data = data.replace(':', '-')
-		data = parse(data)
+		data = []
+		search = request.POST.get('search')
+		search = search.replace(':', '-')
+		if search != '':
+
+			data = parse(search)
 
 		if data == []:
 			return redirect('not_found')
 
 		for element in data:
-			if ('Ранее учтенные' in element)  or ('устаревшей' in element):
+			if ('Ранее учтенные' in element)  or ('устаревшей' in element) or ('Учтенные' in element):
 				print(element)
 				continue
 			info.append(element)
