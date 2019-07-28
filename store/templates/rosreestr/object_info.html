@@ -1,43 +1,12 @@
+{% extends 'base.html' %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-	<meta charset="utf-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-
-	<title>Object</title>
-
-	<!-- Google font -->
-	<link href="https://fonts.googleapis.com/css?family=Montserrat:200,400,700" rel="stylesheet">
-
-	<!-- Custom stlylesheet -->
-	<link type="text/css" rel="stylesheet" href="{% static 'css/object_info.css' %}" />
-
-</head>
-
-<body>
-	<div class="card text-center">
-		<div class="card-body">
-			<div class="col-lg-4 col-lg-offset-4" id="content" style="text-align: center;">
-				<ul class="list-group">
+{% block content %}
+			<div id="content">
+				<ul>
 					{% for element in info %}
 						<li class="list-group-item">{{element}}</li>
 					{% endfor %}
 				</ul>
-				<a href="">Checkout</a>
-			</div>
-		</div>
 	</div>
-
-	<iframe src="https://money.yandex.ru/quickpay/shop-widget?writer=seller&targets=%D0%9F%D0%BE%D0%BA%D1%83%D0%BF%D0%BA%D0%B0%20%D0%97%D0%B5%D0%BC%D0%BB%D0%B8&targets-hint=&default-sum=500&button-text=11&payment-type-choice=on&phone=on&mail=on&hint=&successURL=&quickpay=shop&account=410014034160798" width="423" height="222" frameborder="0" allowtransparency="true" scrolling="no"></iframe>
-
-
-	<form method="POST" action="https://money.yandex.ru/quickpay/confirm.xml">    <input type="hidden" name="receiver" value="41001xxxxxxxxxxxx">
-		<input type="hidden" name="formcomment" value="Проект «Железный человек»: реактор холодного ядерного синтеза">    <input type="hidden" name="short-dest" value="Проект «Железный человек»: реактор холодного ядерного синтеза">    <input type="hidden" name="label" value="$order_id">    <input type="hidden" name="quickpay-form" value="donate">    <input type="hidden" name="targets" value="транзакция {order_id}">    <input type="hidden" name="sum" value="4568.25" data-type="number">    <input type="hidden" name="comment" value="Хотелось бы получить дистанционное управление.">    <input type="hidden" name="need-fio" value="true">    <input type="hidden" name="need-email" value="true">    <input type="hidden" name="need-phone" value="false">    <input type="hidden" name="need-address" value="false">    <label><input type="radio" name="paymentType" value="PC">Яндекс.Деньгами</label>    <label><input type="radio" name="paymentType" value="AC">Банковской картой</label>    <input type="submit" value="Перевести">
-	</form>
-</body>
-
+{% endblock %}

@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect
 import requests
 from bs4 import BeautifulSoup
+from django.contrib import messages
 
 def object_info(request):
 	context = {}
@@ -14,7 +15,8 @@ def object_info(request):
 			data = parse(search)
 
 		if data == []:
-			return redirect('not_found')
+			messages.error(request, 'Kadastral number "{}" not found'.format(request.POST.get('search')))
+			return redirect('/')
 
 		for element in data:
 			if ('Ранее учтенные' in element)  or ('устаревшей' in element) or ('Учтенные' in element):
