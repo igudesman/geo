@@ -10,7 +10,7 @@ def object_info(request):
 		data = []
 		search = request.POST.get('search')
 		search = search.replace(':', '-')
-		if search != '':
+		if (search != '') and ('-' in search):
 
 			data = parse(search)
 

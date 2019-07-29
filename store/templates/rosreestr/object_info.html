@@ -7,6 +7,7 @@
 					{% for element in info %}
 						<li class="list-group-item">{{element}}</li>
 					{% endfor %}
+					<button class="btn btn-success" type="submit" action="checkout"><a href={% url 'checkout' %}>Checkout</a></button>
 				</ul>
-	</div>
+			</div>
 {% endblock %}
