@@ -1,5 +1,28 @@
 {% extends "base.html" %}
 {% load crispy_forms_tags %}
+
 {% block content %}
-    <h2>Welcome back, {{ user.username }}!</h2>
+    <h2>Добро пожаловать, {{ user.username }}!</h2>
+    <div id="content">
+        <table class="table table-bordered">
+        <thead>
+        <tr>
+            <td>Кадастровый номер</td>
+            <td>Продукт</td>
+            <td>Дата заказа</td>
+            <td>Статус заказа</td>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in purchased_items %}
+        <tr>
+          <td>{{ item.parcel_index }}</td>
+          <td>{{ item.name }} ({{ item.carrier }} вид)</td>
+          <td>{{ item.purchased_at }}</td>
+          <td>{{ item.status }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+	</div>
 {% endblock content %}

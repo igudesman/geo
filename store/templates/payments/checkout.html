@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% block content %}
+        <form action="https://money.yandex.ru/quickpay/confirm.xml" method=POST id="form">
+            <legend class="border-bottom mb-4">Выбранный участок: <input type='text' id="search" name="search" value={{ search }} readonly style=" border: 2px solid white;"></input></legend>
+            {% csrf_token %}
+			<div id="content">
+                <table class="table table-bordered">
+                  <thead>
+                    <tr>
+                        <td>Документ</td>
+                        <td>Цена, ₽</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for key, value in bill.items %}
+                    <tr>
+                      <td>{{ key }}</td>
+                      <td>{{ value }}</td>
+                  {% endfor %}
+                  </tbody>
+                </table>
+                <br>
+                <li class="list-group-item" style="text-align: center; width:100%;"><b>Сумма вашего заказа:</b> {{ sum }} ₽</li>
+			</div>
+			<input type="hidden" name="receiver" value="41001117048254">
+            <input type="hidden" name="formcomment" value="Проект «Железный человек»: реактор холодного ядерного синтеза">
+            <input type="hidden" name="short-dest" value="Проект «Железный человек»: реактор холодного ядерного синтеза">
+            <input type="hidden" name="label" value={{ search }}>
+            <input type="hidden" name="quickpay-form" value="shop">
+            <input type="hidden" name="targets" value="Транзакция {{ search }}">
+            <input type="hidden" name="sum" value={{ sum }} data-type="number">
+            <input type="hidden" name="comment" value="Хотелось бы получить реактор холодного ядерного синтеза.">
+            <input type="hidden" name="successURL" value="https://igudesman.pythonanywhere.com">
+            <input type="hidden" name="need-email" value="true">
+            <input type="hidden" name="paymentType" value="AC">
+		    <input type="submit" class="btn btn-success" style="text-align: center; width:100%;" value="Перейти к оплате"></input>
+
+		</form>
+
+{% endblock %}

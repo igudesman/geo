@@ -5,9 +5,11 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 def validate_email_unique(value):
-	exists = User.objects.filter(email=value)
-	if exists:
-		raise ValidationError("A user with that email already exists.")
+	if User.objects.filter(email=value):
+		raise ValidationError("""
+		Введенный вами адрес электронный почту уже зарегистрирован!
+		Пожалуйста, используйте соответствующий профиль или зарегистрируйтесь с другим адресом.
+		""")
 
 class UserRegisterForm(UserCreationForm):
 	email = forms.EmailField(validators=[validate_email_unique])

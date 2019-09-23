@@ -2,12 +2,9 @@
 <!DOCTYPE html>
 <html>
 <head>
-
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-
-
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link href="{% static 'css/navbar.css' %}" rel="stylesheet" />
@@ -16,16 +13,13 @@
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600" rel="stylesheet">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-
     <link rel="stylesheet" type="text/css" href="{% static 'base.css' %}">
-
-
 </head>
 <body>
     <header class="site-header">
       <nav class="navbar navbar-default navbar-expand-lg navbar-light">
         <div class="navbar-header d-flex col">
-          <a class="navbar-brand" href="../">Brand<b>Name</b></a>      
+          <a class="navbar-brand" href="../">Центр ГИС<b> Университета Иннополис</b></a>
           <button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle navbar-toggler ml-auto">
             <span class="navbar-toggler-icon"></span>
             <span class="icon-bar"></span>
@@ -37,39 +31,36 @@
           <ul class="nav navbar-nav navbar-right ml-auto">
           {% if user.is_authenticated %}
             <li>
-              <a class="nav-link" href={% url 'profile' %}>Profile</a>
+              <a class="nav-link" href={% url 'profile' %}>Профиль</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href={% url 'logout' %}><i class="fa fa-user-o"></i> Log Out</a>
+              <a class="nav-link" href={% url 'logout' %}><i class="fa fa-user-o"></i> Выйти</a>
             </li>
           {% else %}
             <li class="nav-item dropdown">
-              <a class="nav-link" href={% url 'login' %}><i class="fa fa-user-o"></i> Sign In</a>
+              <a class="nav-link" href={% url 'login' %}><i class="fa fa-user-o"></i> Вход</a>
             </li>
             <li class="nav-item dropdown">
-              <a class="nav-link" href={% url 'register' %}><i class="fa fa-user-o"></i> Sign Up</a>
+              <a class="nav-link" href={% url 'register' %}><i class="fa fa-user-o"></i> Регистрация</a>
             </li>
           {% endif %}
           </ul>
         </div>
       </nav>
     </header>
-
-    <main role="main" class="container">
-      <div class="row">
-        <div class="col-md-8">
-          {% if messages %}
-            {% for message in messages %}
-              <div class="alert alert-{{ message.tags }}">
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-{{ message.tags }}">
                 {{ message }}
-              </div>
-            {% endfor %}
-          {% endif %}
+            </div>
+        {% endfor %}
+    {% endif %}
+    {% block search %}{% endblock %}
+    <main role="main" class="container">
+        <div>
           {% block content %}{% endblock %}
         </div>
-      </div>
     </main>
-
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>

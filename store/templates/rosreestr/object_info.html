@@ -2,12 +2,66 @@
 {% load static %}
 
 {% block content %}
+        <form action="../checkout/" method=POST>
+            <legend class="border-bottom mb-4">Выбранный участок: <input type='text' id="search" name="search" value={{ search }} readonly style=" border: 2px solid white;"></input></legend>
+            <input type="hidden" name="info[]" value={{ info }}>
+            {% csrf_token %}
 			<div id="content">
-				<ul>
-					{% for element in info %}
-						<li class="list-group-item">{{element}}</li>
-					{% endfor %}
-					<button class="btn btn-success" type="submit" action="checkout"><a href={% url 'checkout' %}>Checkout</a></button>
-				</ul>
+			    <table class="table table-bordered">
+			        <tbody>
+			            <tr>
+			                <td>Адрес полный</td>
+			                <td>{{ info.address_full }}</td>
+			            </tr>
+			            <tr>
+			                <td>Адрес по документам</td>
+			                <td>{{ info.address_doc }}</td>
+			            </tr>
+			            <tr>
+			                <td>Площадь</td>
+			                <td>{{ info.area }} м²</td>
+			            </tr>
+			         </tbody>
+                <table class="table table-bordered">
+					<br>
+                  <thead>
+                    <tr>
+                      <th scope="col"></th>
+                      <th scope="col" colspan=2>На бумажном носителе</th>
+                      <th scope="col" colspan=2>В электронном виде</th>
+                    </tr>
+                    <tr>
+                      <td scope="col"></td>
+                      <td scope="col">Цена, ₽</td>
+                      <td scope="col">Заказ</td>
+                      <td scope="col">Цена, ₽</td>
+                      <td scope="col">Заказ</td>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {% for item in price_list %}
+                    <tr>
+                      <td>{{ item.name }}</td>
+                      <td><input type='text' name="price_paper" value={{ item.price_paper }} readonly style=" border: 2px solid white; text-align: center;"></input></td>
+                      <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck_{{ item.name }}_paper" name="check_{{ item.name }}_paper" value=1>
+                            <label class="custom-control-label" for="customCheck_{{ item.name }}_paper"></label>
+                        </div>
+                      </td>
+                      <td><input type='text' name="price_digital" value={{ item.price_digital }} readonly style=" border: 2px solid white; text-align: center;"></input></td>
+                      <td>
+                        <div class="custom-control custom-checkbox">
+                            <input type="checkbox" class="custom-control-input" id="customCheck_{{ item.name }}_digital" name="check_{{ item.name }}_digital" value="1">
+                            <label class="custom-control-label" for="customCheck_{{ item.name }}_digital"></label>
+                        </div>
+                      </td>
+                    </tr>
+                    {% endfor %}
+                  </tbody>
+                </table>
+                <br>
+                <input type="submit" class="btn btn-success" style="text-align: center; width:100%;" value="Рассчитать стоимость товара"></input>
 			</div>
+		</form>
 {% endblock %}
